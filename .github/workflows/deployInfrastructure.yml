@@ -17,6 +17,7 @@ on:
 jobs: 
   deploy:
     environment: ${{ inputs.environmentType }}
+
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@main
@@ -29,6 +30,8 @@ jobs:
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        subnetName: ${{ inputs.subnetName }}
+        subnetAddressPrefix: ${{ inputs.subnetAddressPrefix }} 
         template: infrastructure/main.bicep
         failOnStdErr: false
         #parameters: ./infrastructure/parameterfiles/azuredeploy.parameters-${{ inputs.environmentType }}.json
