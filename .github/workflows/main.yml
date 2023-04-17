@@ -29,14 +29,14 @@ jobs:
   validate: 
     uses: ./.github/workflows/validate.yml  
     with:
-      environmentType: dev
+      environmentType: ${{ github.event.inputs.environmentType }}
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
-  deploy-to-dev:
+  deploy-to-env:
     needs: [lint, validate]
     with:
-      environmentType: dev
+      environmentType: ${{ github.event.inputs.environmentType }}
       subnetName: ${{ github.event.inputs.subnetName }}
       subnetAddressPrefix: ${{ github.event.inputs.subnetAddressPrefix }}
     uses: ./.github/workflows/deployInfrastructure.yml
