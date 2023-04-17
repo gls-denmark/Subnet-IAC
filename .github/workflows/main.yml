@@ -30,6 +30,8 @@ jobs:
     uses: ./.github/workflows/validate.yml  
     with:
       environmentType: dev
+      subnetAddressPrefix: '10.29.248.0/24'
+      subnetName: 'mySubnet'
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
