@@ -1,6 +1,7 @@
 name: Deploy using GitHub Actions
 
 on: 
+  push:
   workflow_dispatch:
     inputs:
       resourceGroupName:
