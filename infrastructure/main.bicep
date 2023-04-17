@@ -23,10 +23,14 @@ var vnetName = 'GLSDK-VNET-${environmentName}'
 
 // Existing Resources //
 
-
 resource extVnet 'Microsoft.Network/virtualNetworks@2022-05-01'  existing = {
   name: vnetName
   scope: resourceGroup(vnetRG)
+}
+
+resource extRouteTable 'Microsoft.Network/routeTables@2022-09-01' existing = {
+  name: 'GLSDK-RT-${environmentName}'
+  scope: resourceGroup('glsdk-rg-network-${environmentName}')
 }
 
 // resource extSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' existing = {
@@ -46,6 +50,7 @@ module Network 'modules/subnetModule.bicep' = {
     vnetName: vnetName
     vnetRG: vnetRG
     adressPrefix: subnetAddressPrefix
+    routeTable: extRouteTable.properties.resourceGuid
   }
 }
 
