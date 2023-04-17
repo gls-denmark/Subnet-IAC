@@ -1,0 +1,32 @@
+on: 
+  workflow_call:
+    inputs:
+      environmentType:
+        required: true
+        type: string
+    secrets:
+      AZURE_CREDENTIALS:
+        required: true        
+
+jobs: 
+  deploy:
+    environment: ${{ inputs.environmentType }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: deploy
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        template: infrastructure/main.bicep
+        failOnStdErr: false
+        parameters: ./infrastructure/parameterfiles/azuredeploy.parameters-${{ inputs.environmentType }}.json
+        scope: subscription
+        region: westeurope
+
+        
