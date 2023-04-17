@@ -31,7 +31,7 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         template: infrastructure/main.bicep
         failOnStdErr: false
-        parameters: ./infrastructure/parameterfiles/azuredeploy.parameters-${{ inputs.environmentType }}.json
+        #parameters: ./infrastructure/parameterfiles/azuredeploy.parameters-${{ inputs.environmentType }}.json
         scope: subscription
         region: westeurope
 
