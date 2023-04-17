@@ -22,7 +22,7 @@ resource extNatGateway 'Microsoft.Network/natGateways@2022-09-01' existing = {
 }
 
 resource newSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-09-01' = {
-  name: '${extVnet}/SubnetNameKVI'
+  name: '${vnetName}/SubnetNameKVI'
   properties:{
     natGateway: extNatGateway
     routeTable: extRouteTable
