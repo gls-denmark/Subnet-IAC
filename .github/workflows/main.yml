@@ -12,6 +12,15 @@ on:
         description: 'Address prefix for the new subnet'
         required: true
         default: '10.29.248.0/24'
+      environmentType: 
+        description: 'env'
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - test
+          - prod
 
 jobs:
   lint: 
