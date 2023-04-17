@@ -11,9 +11,9 @@ param environmentName string
 @description('location of all resources')
 param location string = 'westeurope'
 
-param subnetname string
+param subnetName string
 
-param adressPrefix string = '10.29.248.0/24'
+param subnetAddressPrefix string
 
 // Existings vars //
 
@@ -42,10 +42,10 @@ module Network 'modules/subnetModule.bicep' = {
   params: {
     environmentName: environmentName
     location: location
-    subnetName: subnetname
+    subnetName: subnetName
     vnetName: vnetName
     vnetRG: vnetRG
-    adressPrefix: adressPrefix
+    adressPrefix: subnetAddressPrefix
   }
 }
 
