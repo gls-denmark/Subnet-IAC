@@ -30,17 +30,15 @@ jobs:
     uses: ./.github/workflows/validate.yml  
     with:
       environmentType: dev
-      subnetName: 'mySubnet'
-      subnetAddressPrefix: '10.29.248.0/24'
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
   deploy-to-env:
     needs: [lint, validate]
     with:
-      environmentType: ${{ inputs.environmentType }}
-      subnetName: ${{ inputs.subnetName }}
-      subnetAddressPrefix: ${{ inputs.subnetAddressPrefix }}
+      environmentType: 'dev'
+      subnetName: 'mySubnet'
+      subnetAddressPrefix: '10.29.248.0/24'
     uses: ./.github/workflows/deployInfrastructure.yml
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
