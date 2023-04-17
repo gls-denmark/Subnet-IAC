@@ -13,6 +13,8 @@ param location string = 'westeurope'
 
 param subnetname string
 
+param adressPrefix string = '10.29.248.0/24'
+
 // Existings vars //
 
 var vnetRG = 'GLSDK-RG-Network-${environmentName}'
@@ -43,6 +45,7 @@ module Network 'modules/subnetModule.bicep' = {
     subnetName: subnetname
     vnetName: vnetName
     vnetRG: vnetRG
+    adressPrefix: adressPrefix
   }
 }
 

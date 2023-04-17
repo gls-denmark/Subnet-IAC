@@ -3,6 +3,7 @@ param subnetName string
 param vnetRG string
 param vnetName string
 param environmentName string
+param adressPrefix string
 
 
 resource extVnet 'Microsoft.Network/virtualNetworks@2022-05-01'  existing = {
@@ -25,5 +26,6 @@ resource newSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-09-01' = {
   properties:{
     natGateway: extNatGateway
     routeTable: extRouteTable
+    addressPrefix: adressPrefix
   }
 }
