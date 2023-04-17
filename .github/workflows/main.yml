@@ -8,14 +8,14 @@ on:
         description: 'Name of the existing resource group to deploy the subnet in'
         required: true
         default: 'myResourceGroup'
-    subnetName:
-      description: 'Name of the new subnet'
-      required: true
-      default: 'mySubnet'
-    subnetAddressPrefix:
-      description: 'Address prefix for the new subnet'
-      required: true
-      default: '10.0.1.0/24'
+      subnetName:
+        description: 'Name of the new subnet'
+        required: true
+        default: 'mySubnet'
+      subnetAddressPrefix:
+        description: 'Address prefix for the new subnet'
+        required: true
+        default: '10.29.248.0/24'
 
 jobs:
   lint: 
