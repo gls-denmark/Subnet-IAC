@@ -29,7 +29,7 @@ jobs:
   validate: 
     uses: ./.github/workflows/validate.yml  
     with:
-      environmentType: ${{ inputs.environmentType }}
+      environmentType: dev
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
