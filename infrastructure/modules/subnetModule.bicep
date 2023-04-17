@@ -5,16 +5,12 @@ param vnetName string
 param environmentName string
 param adressPrefix string
 param routeTable string
-
-resource extNatGateway 'Microsoft.Network/natGateways@2022-09-01' existing = {
-  name: 'GLSDK-NG-${environmentName}'
-  scope: resourceGroup('glsdk-rg-network-${environmentName}')
-}
+param natGateway string
 
 resource newSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-09-01' = {
   name: '${vnetName}/SubnetNameKVI'
   properties:{
-    natGateway: extNatGateway
+    natGateway: natGateway
     addressPrefix: adressPrefix
     routeTable: routeTable
   }

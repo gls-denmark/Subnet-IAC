@@ -33,6 +33,11 @@ resource extRouteTable 'Microsoft.Network/routeTables@2022-09-01' existing = {
   scope: resourceGroup('glsdk-rg-network-${environmentName}')
 }
 
+resource extNatGateway 'Microsoft.Network/natGateways@2022-09-01' existing = {
+  name: 'GLSDK-NG-${environmentName}'
+  scope: resourceGroup('glsdk-rg-network-${environmentName}')
+}
+
 // resource extSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-01-01' existing = {
 //   name: SubnetName
 //   parent: extVnet
@@ -51,6 +56,7 @@ module Network 'modules/subnetModule.bicep' = {
     vnetRG: vnetRG
     adressPrefix: subnetAddressPrefix
     routeTable: extRouteTable.id
+    natGateway: extNatGateway.id
   }
 }
 
