@@ -2,17 +2,19 @@ name: Deploy using GitHub Actions
 
 on: 
   workflow_dispatch:
-  push:
-    branches:
-      - main
-
-inputs:
-  subnetname:
-    description: 'blabla'
-    required: true
-  subnetAddressPrefix:
-    description: 'heyson'
-    required: true
+    inputs:
+      resourceGroupName:
+        description: 'Name of the existing resource group to deploy the subnet in'
+        required: true
+        default: 'myResourceGroup'
+    subnetName:
+      description: 'Name of the new subnet'
+      required: true
+      default: 'mySubnet'
+    subnetAddressPrefix:
+      description: 'Address prefix for the new subnet'
+      required: true
+      default: '10.0.1.0/24'
 
 jobs:
   lint: 
@@ -29,24 +31,12 @@ jobs:
     needs: [lint, validate]
     with:
       environmentType: dev
-      subnetname: ${{ inputs.subnetname }}
-      subnetAddressPrefix: ${{ inputs.subnetAddressPrefix }}
+      subnetName: ${{ github.event.inputs.subnetName }}
+      subnetAddressPrefix: ${{ github.event.inputs.subnetAddressPrefix }}
     uses: ./.github/workflows/deployInfrastructure.yml
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
-  deploy-to-test:
-    needs: [deploy-to-dev]
-    with:
-      environmentType: test
-    uses: ./.github/workflows/deployInfrastructure.yml    
-    secrets:
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-  
-  deploy-to-prod:
-    needs: [deploy-to-test]
-    with:
-      environmentType: prod
-    uses: ./.github/workflows/deployInfrastructure.yml    
-    secrets:
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+
+
+      #https://stackoverflow.com/questions/71409950/github-action-how-to-access-the-inputs læs senere
