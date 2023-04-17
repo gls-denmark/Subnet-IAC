@@ -2,14 +2,17 @@ name: Deploy using GitHub Actions
 
 on: 
   workflow_dispatch:
-  inputs:
-    subnetname:
-    required: true
-    type: string
-
   push:
     branches:
       - main
+
+inputs:
+  subnetname:
+    description: 'blabla'
+    required: true
+  subnetAddressPrefix:
+    description: 'heyson'
+    required: true
 
 jobs:
   lint: 
@@ -27,6 +30,7 @@ jobs:
     with:
       environmentType: dev
       subnetname: ${{ inputs.subnetname }}
+      subnetAddressPrefix: ${{ inputs.subnetAddressPrefix }}
     uses: ./.github/workflows/deployInfrastructure.yml
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
