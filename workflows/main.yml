@@ -1,0 +1,48 @@
+name: Deploy using GitHub Actions
+
+on: 
+  workflow_dispatch:
+  inputs:
+    subnetname:
+    required: true
+    type: string
+
+  push:
+    branches:
+      - main
+
+jobs:
+  lint: 
+    uses: ./.github/workflows/lint.yml
+
+  validate: 
+    uses: ./.github/workflows/validate.yml  
+    with:
+      environmentType: dev
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+
+  deploy-to-dev:
+    needs: [lint, validate]
+    with:
+      environmentType: dev
+      subnetname: ${{ inputs.subnetname }}
+    uses: ./.github/workflows/deployInfrastructure.yml
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+
+  deploy-to-test:
+    needs: [deploy-to-dev]
+    with:
+      environmentType: test
+    uses: ./.github/workflows/deployInfrastructure.yml    
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  
+  deploy-to-prod:
+    needs: [deploy-to-test]
+    with:
+      environmentType: prod
+    uses: ./.github/workflows/deployInfrastructure.yml    
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
