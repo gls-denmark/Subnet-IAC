@@ -35,12 +35,12 @@ jobs:
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
-  # deploy-to-env:
-  #   needs: [lint, validate]
-  #   with:
-  #     environmentType: 'dev'
-  #     subnetName: 'mySubnet'
-  #     subnetAddressPrefix: '10.29.248.0/24'
-  #   uses: ./.github/workflows/deployInfrastructure.yml
-  #   secrets:
-  #     AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  deploy-to-env:
+    needs: [lint, validate]
+    with:
+      environmentType: 'dev'
+      subnetName: 'mySubnet'
+      subnetAddressPrefix: '10.29.248.0/24'
+    uses: ./.github/workflows/deployInfrastructure.yml
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
