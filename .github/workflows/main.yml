@@ -4,10 +4,6 @@ on:
   push:
   workflow_dispatch:
     inputs:
-      resourceGroupName:
-        description: 'Name of the existing resource group to deploy the subnet in'
-        required: true
-        default: 'myResourceGroup'
       subnetName:
         description: 'Name of the new subnet'
         required: true
