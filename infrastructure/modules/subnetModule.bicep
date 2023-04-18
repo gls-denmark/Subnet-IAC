@@ -8,7 +8,7 @@ param routeTable string
 param natGateway string
 
 resource newSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-09-01' = {
-  name: '${extVnet}/SubnetNameKVI'
+  name: '${vnetName}/SubnetNameKVI'
   properties:{
     routeTable: {
       id: routeTable
