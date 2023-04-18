@@ -1,0 +1,12 @@
+on: 
+  workflow_call:
+
+jobs:  
+  lint: 
+    name: Lint code
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Run Bicep linter
+      run: az bicep build --file infrastructure/main.bicep

@@ -2,10 +2,13 @@ on:
   workflow_call:
     inputs:
       environmentType:
+        required: true
         type: string
       subnetName: 
+        required: true
         type: string
       subnetAddressPrefix: 
+        required: true
         type: string
     secrets:
       AZURE_CREDENTIALS:
@@ -14,6 +17,7 @@ on:
 jobs: 
   deploy:
     environment: ${{ inputs.environmentType }}
+
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@main
@@ -26,9 +30,10 @@ jobs:
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        subnetName: ${{ inputs.subnetName }}
+        subnetAddressPrefix: ${{ inputs.subnetAddressPrefix }} 
         template: infrastructure/main.bicep
         failOnStdErr: false
-        parameters: ./infrastructure/parameterfiles/azuredeploy.parameters-${{ inputs.environmentType }}.json
         scope: subscription
         region: westeurope
 

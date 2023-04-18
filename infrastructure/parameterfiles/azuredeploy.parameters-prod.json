@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "environmentName": {
+            "value": "prod"
+        }, 
+        "containerRegistryshort":{
+            "value": "glsdkcrops55c2ofprod"
+        },   
+        "opsSharedRG":{
+            "value": "GLSDK-RG-OPS-SHARED-prod"
+        },   
+        "extkeyVaultName":{
+            "value": "glsdk-kv-ops-55c2of-prod"
+        }, 
+        "devAADId":{
+            "value": "68c0f05b-5eb5-4a66-9edc-9eb6f071abcf"
+        }, 
+        "azureOwnersAADId":{
+            "value": "06dcd7b7-2e20-40b0-bff3-014d4833dab2"
+        }
+    }
+}

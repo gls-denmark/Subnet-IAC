@@ -2,7 +2,6 @@ on:
   workflow_call:
     inputs:
       environmentType:
-        required: true
         type: string
       subnetName: 
         type: string
@@ -11,6 +10,7 @@ on:
     secrets:
       AZURE_CREDENTIALS:
         required: true  
+
 
 jobs: 
   validate: 
@@ -27,6 +27,5 @@ jobs:
         deploymentName: ${{ github.run_number }}
         template: ./infrastructure/main.bicep        
         deploymentMode: Validate
-        parameters: ./infrastructure/parameterfiles/azuredeploy.parameters-${{ inputs.environmentType }}.json
         scope: subscription
         region: westeurope
