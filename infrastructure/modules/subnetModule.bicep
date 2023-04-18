@@ -10,8 +10,9 @@ param natGateway object
 resource newSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-09-01' = {
   name: '${vnetName}/SubnetNameKVI'
   properties:{
-    routeTable: routeTable
-    natGateway: natGateway
+    routeTable: routeTable.id
+    natGateway: natGateway.id
     addressPrefix: adressPrefix
+    
      }
 }
