@@ -2,9 +2,15 @@ name: Deploy using GitHub Actions
 
 on: 
   workflow_dispatch:
-  push:
-    branches:
-      - main
+    inputs:
+      subnetName:
+        description: 'Name of the new subnet'
+        required: true
+        default: 'mySubnet'
+      subnetAddressPrefix:
+        description: 'Address prefix for the new subnet'
+        required: true
+        default: '10.29.248.0/24'
 
 jobs:
   lint: 
@@ -14,6 +20,8 @@ jobs:
     uses: ./.github/workflows/validate.yml  
     with:
       environmentType: dev
+      subnetAddressPrefix: '10.29.248.0/24'
+      subnetName: 'mySubnet'
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -21,22 +29,8 @@ jobs:
     needs: [lint, validate]
     with:
       environmentType: dev
+      subnetAddressPrefix: '10.29.248.0/24'
+      subnetName: 'mySubnet'
     uses: ./.github/workflows/deployInfrastructure.yml
-    secrets:
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-
-  deploy-to-test:
-    needs: [deploy-to-dev]
-    with:
-      environmentType: test
-    uses: ./.github/workflows/deployInfrastructure.yml    
-    secrets:
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-  
-  deploy-to-prod:
-    needs: [deploy-to-test]
-    with:
-      environmentType: prod
-    uses: ./.github/workflows/deployInfrastructure.yml    
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
