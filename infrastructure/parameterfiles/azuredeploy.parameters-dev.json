@@ -6,10 +6,10 @@
             "value": "dev"
         }, 
         "subnetAddressPrefix":{
-            "value": "glsdkcropsdev"
+            "value": "10.29.248.0/24"
         },   
         "subnetName":{
-            "value": "GLSDK-RG-OPS-SHARED-dev"
+            "value": "paramsubnetname"
         }
     }
 }
