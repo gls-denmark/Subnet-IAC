@@ -55,8 +55,8 @@ module Network 'modules/subnetModule.bicep' = {
     vnetName: vnetName
     vnetRG: vnetRG
     adressPrefix: subnetAddressPrefix
-    routeTable: extRouteTable
-    natGateway: extNatGateway
+    routeTable: extRouteTable.id
+    natGateway: extNatGateway.id
   }
 }
 
