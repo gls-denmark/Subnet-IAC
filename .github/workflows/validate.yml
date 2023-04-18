@@ -1,15 +1,5 @@
 on: 
   workflow_call:
-    inputs:
-      environmentType:
-        required: true
-        type: string
-      subnetName: 
-        required: true
-        type: string
-      subnetAddressPrefix: 
-        required: true
-        type: string
     secrets:
       AZURE_CREDENTIALS:
         required: true  
