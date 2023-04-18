@@ -17,5 +17,5 @@ resource newSubnet 'Microsoft.Network/virtualNetworks/subnets@2022-09-01' = {
       id: natGateway
     }
     addressPrefix: adressPrefix
-     }
+ }
 }
